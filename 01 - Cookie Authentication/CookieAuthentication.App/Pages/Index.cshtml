@@ -1,0 +1,80 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <h1 class="display-4">Welcome, @User.Identity.Name!</h1>
+        <div><span>Please <a href="/Account/Logout">Logout</a></span></div>
+
+        <br />
+        <form method="post">
+            <button class="btn">Get Weather Data</button>
+        </form>
+
+    }
+    else
+    {
+        <p>Please <a href="/Account/Login">log in</a> to view this page.</p>
+    }
+
+</div>
+@if (Model.WeatherList != null && Model.WeatherList.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Temperature (°C)</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var weather in Model.WeatherList)
+            {
+                <tr>
+                    <td>@weather.Date</td>
+                    <td>@weather.Temperature</td>
+                    <td>@weather.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div style="text-align:center; font-size:30px; color:red;">No Data Retrieved!</div>
+}
+<style>
+    .btn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        .table th {
+            background-color: #f4f4f4;
+            text-align: left;
+        }
+</style>
