@@ -45,7 +45,7 @@ namespace JwtAuthentication.APIs.Controllers
                     new Claim(ClaimTypes.Email, user.email),
                     new Claim(ClaimTypes.Role, user.role)
                 },
-                expires: DateTime.Now.AddMinutes(30),
+                expires: DateTime.Now.AddMinutes(Convert.ToInt32(_configuration["JWT:ExpirationInMinutes"])),
                 signingCredentials: creds);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
