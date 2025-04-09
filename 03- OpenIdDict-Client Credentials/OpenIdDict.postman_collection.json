@@ -1,0 +1,137 @@
+{
+	"info": {
+		"_postman_id": "3a96d007-f56d-4d78-a6c6-afccc08b6171",
+		"name": "OpenIdDict",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10648903"
+	},
+	"item": [
+		{
+			"name": "Get Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var accessToken = jsonData.access_token;\r",
+							"\r",
+							"    pm.collectionVariables.set(\"ACCESS_TOKEN\", accessToken);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "service-worker",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "388D45FA-B36B-4988-BA59-B187D329C207",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{AUTH_API_URL}}/connect/token",
+					"host": [
+						"{{AUTH_API_URL}}"
+					],
+					"path": [
+						"connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Weather",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/weatherforecast",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"weatherforecast"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "AUTH_API_URL",
+			"value": "https://localhost:7279",
+			"type": "string"
+		},
+		{
+			"key": "ACCESS_TOKEN",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "API_URL",
+			"value": "https://localhost:7092",
+			"type": "string"
+		}
+	]
+}
