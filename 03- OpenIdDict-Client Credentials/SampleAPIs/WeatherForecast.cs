@@ -1,4 +1,4 @@
-namespace OpenIdDict_ClientCredentials
+namespace SampleAPIs
 {
     public class WeatherForecast
     {

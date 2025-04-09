@@ -1,6 +1,4 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using OpenIdDict_ClientCredentials.Data;
 using OpenIdDict_ClientCredentials.Services;
 
@@ -61,16 +59,6 @@ namespace OpenIdDict_ClientCredentials
 
                 });
 
-            //for accessing the APIs using the token
-            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
-                {
-                    options.Authority = "https://localhost:7279";
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateAudience = false // or specify your audience if needed
-                    };
-                });
             builder.Services.AddHostedService<WorkerService>();
             var app = builder.Build();
 

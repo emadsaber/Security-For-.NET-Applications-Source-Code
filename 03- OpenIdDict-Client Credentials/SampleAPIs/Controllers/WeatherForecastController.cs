@@ -1,8 +1,7 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace OpenIdDict_ClientCredentials.Controllers
+namespace SampleAPIs.Controllers
 {
     [Authorize]
     [ApiController]
