@@ -22,9 +22,10 @@ namespace SampleAPIs
                 .AddJwtBearer(options =>
                 {
                     options.Authority = "https://localhost:7165";
+                    options.Audience = "resource-server"; // The audience you specified in the token
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ValidateAudience = false // or specify your audience if needed
+                        ValidateAudience = true// or specify your audience if needed
                     };
                 });
 
